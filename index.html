@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para a minha princesa ❤️</title>
+    <style>
+        :root {
+            --cor-fundo: #fff0f3;
+            --cor-primaria: #ff4d6d;
+            --cor-texto: #590d22;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            z-index: 10;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
+            width: 85%;
+            max-width: 400px;
+            border: 2px solid var(--cor-primaria);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .btn {
+            background-color: var(--cor-primaria);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .heart {
+            position: fixed;
+            top: -10vh;
+            font-size: 24px;
+            user-select: none;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+            }
+        }
+
+        #mensagem-extra {
+            display: none;
+            margin-top: 20px;
+            font-style: italic;
+            color: var(--cor-primaria);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="musica" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <div id="conteudo-principal">
+            <h1>Para minha princesa! ❤️</h1>
+            <p>Eu estava pensando em você e decidi criar isso para te mostrar o quanto você é especial.</p>
+            <button class="btn" id="botaoSurpresa" onclick="mostrarSurpresa()">Clique aqui, Ana 🎵</button>
+            
+            <div id="mensagem-extra">
+                <p>
+                    "Ana, entre todas as linhas do meu código, você é a única que faz tudo realmente funcionar."
+                </p>
+                <p style="font-size: 0.9rem; margin-top: 10px;">❤️ Te amo! ❤️</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function criarCoracao() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.opacity = Math.random() * 0.7 + 0.3;
+            
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        // Corações lentos no fundo desde o início
+        setInterval(criarCoracao, 500);
+
+        function mostrarSurpresa() {
+            // Inicia a música
+            const audio = document.getElementById('musica');
+            audio.play().catch(e => console.log("O áudio precisa de interação para tocar."));
+
+            // Exibe a mensagem e remove o botão
+            document.getElementById('mensagem-extra').style.display = 'block';
+            document.getElementById('botaoSurpresa').style.display = 'none';
+            
+            // Chuva intensa de corações
+            for(let i=0; i<30; i++) {
+                setTimeout(criarCoracao, i * 150);
+            }
+        }
+    </script>
+</body>
+</html>
